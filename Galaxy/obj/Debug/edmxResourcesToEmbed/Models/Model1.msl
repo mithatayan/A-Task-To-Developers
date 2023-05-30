@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_GalaxyModelStoreContainer" CdmEntityContainer="DB_GalaxyEntities">
+    <EntitySetMapping Name="TBL_DEVELOPER">
+      <EntityTypeMapping TypeName="DB_GalaxyModel.TBL_DEVELOPER">
+        <MappingFragment StoreEntitySet="TBL_DEVELOPER">
+          <ScalarProperty Name="DEV_TASK" ColumnName="DEV_TASK" />
+          <ScalarProperty Name="DEV_ID" ColumnName="DEV_ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+          <ScalarProperty Name="DEV_LVL" ColumnName="DEV_LVL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ROL">
+      <EntityTypeMapping TypeName="DB_GalaxyModel.TBL_ROL">
+        <MappingFragment StoreEntitySet="TBL_ROL">
+          <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+          <ScalarProperty Name="ROL" ColumnName="ROL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_TASK">
+      <EntityTypeMapping TypeName="DB_GalaxyModel.TBL_TASK">
+        <MappingFragment StoreEntitySet="TBL_TASK">
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="LEVEL_ID" ColumnName="LEVEL_ID" />
+          <ScalarProperty Name="TASK_ID" ColumnName="TASK_ID" />
+          <ScalarProperty Name="TASK_NAME" ColumnName="TASK_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

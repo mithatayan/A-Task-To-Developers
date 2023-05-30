@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_GalaxyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_DEVELOPER">
+          <Key>
+            <PropertyRef Name="DEV_ID" />
+          </Key>
+          <Property Name="DEV_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="30" />
+          <Property Name="SURNAME" Type="varchar" MaxLength="30" />
+          <Property Name="DEV_LVL" Type="int" />
+          <Property Name="DEV_TASK" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TBL_ROL">
+          <Key>
+            <PropertyRef Name="ROL_ID" />
+          </Key>
+          <Property Name="ROL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROL" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_TASK">
+          <Key>
+            <PropertyRef Name="TASK_ID" />
+          </Key>
+          <Property Name="TASK_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TASK_NAME" Type="varchar" MaxLength="50" />
+          <Property Name="LEVEL_ID" Type="int" />
+          <Property Name="USER_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK_TBL_DEVELOPER_TBL_ROL">
+          <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="0..1" />
+          <End Role="TBL_DEVELOPER" Type="Self.TBL_DEVELOPER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="TBL_DEVELOPER">
+              <PropertyRef Name="DEV_LVL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TASK_TBL_DEVELOPER">
+          <End Role="TBL_DEVELOPER" Type="Self.TBL_DEVELOPER" Multiplicity="0..1" />
+          <End Role="TBL_TASK" Type="Self.TBL_TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_DEVELOPER">
+              <PropertyRef Name="DEV_ID" />
+            </Principal>
+            <Dependent Role="TBL_TASK">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TASK_TBL_ROL">
+          <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="0..1" />
+          <End Role="TBL_TASK" Type="Self.TBL_TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="TBL_TASK">
+              <PropertyRef Name="LEVEL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_GalaxyModelStoreContainer">
+          <EntitySet Name="TBL_DEVELOPER" EntityType="Self.TBL_DEVELOPER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ROL" EntityType="Self.TBL_ROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_TASK" EntityType="Self.TBL_TASK" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBL_DEVELOPER_TBL_ROL" Association="Self.FK_TBL_DEVELOPER_TBL_ROL">
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+            <End Role="TBL_DEVELOPER" EntitySet="TBL_DEVELOPER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TASK_TBL_DEVELOPER" Association="Self.FK_TBL_TASK_TBL_DEVELOPER">
+            <End Role="TBL_DEVELOPER" EntitySet="TBL_DEVELOPER" />
+            <End Role="TBL_TASK" EntitySet="TBL_TASK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TASK_TBL_ROL" Association="Self.FK_TBL_TASK_TBL_ROL">
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+            <End Role="TBL_TASK" EntitySet="TBL_TASK" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_GalaxyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_DEVELOPER">
+          <Key>
+            <PropertyRef Name="DEV_ID" />
+          </Key>
+          <Property Name="DEV_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DEV_LVL" Type="Int32" />
+          <NavigationProperty Name="TBL_ROL" Relationship="Self.FK_TBL_DEVELOPER_TBL_ROL" FromRole="TBL_DEVELOPER" ToRole="TBL_ROL" />
+          <Property Name="DEV_TASK" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_TASK" Relationship="DB_GalaxyModel.FK_TBL_TASK_TBL_DEVELOPER" FromRole="TBL_DEVELOPER" ToRole="TBL_TASK" />
+        </EntityType>
+        <EntityType Name="TBL_ROL">
+          <Key>
+            <PropertyRef Name="ROL_ID" />
+          </Key>
+          <Property Name="ROL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_DEVELOPER" Relationship="Self.FK_TBL_DEVELOPER_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_DEVELOPER" />
+          <NavigationProperty Name="TBL_TASK" Relationship="DB_GalaxyModel.FK_TBL_TASK_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_TASK" />
+        </EntityType>
+        <EntityType Name="TBL_TASK">
+          <Key>
+            <PropertyRef Name="TASK_ID" />
+          </Key>
+          <Property Name="TASK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TASK_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LEVEL_ID" Type="Int32" />
+          <Property Name="USER_ID" Type="Int32" />
+          <NavigationProperty Name="TBL_DEVELOPER" Relationship="DB_GalaxyModel.FK_TBL_TASK_TBL_DEVELOPER" FromRole="TBL_TASK" ToRole="TBL_DEVELOPER" />
+          <NavigationProperty Name="TBL_ROL" Relationship="DB_GalaxyModel.FK_TBL_TASK_TBL_ROL" FromRole="TBL_TASK" ToRole="TBL_ROL" />
+        </EntityType>
+        <Association Name="FK_TBL_DEVELOPER_TBL_ROL">
+          <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="0..1" />
+          <End Role="TBL_DEVELOPER" Type="Self.TBL_DEVELOPER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="TBL_DEVELOPER">
+              <PropertyRef Name="DEV_LVL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_GalaxyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_DEVELOPER" EntityType="Self.TBL_DEVELOPER" />
+          <EntitySet Name="TBL_ROL" EntityType="Self.TBL_ROL" />
+          <EntitySet Name="TBL_TASK" EntityType="Self.TBL_TASK" />
+          <AssociationSet Name="FK_TBL_DEVELOPER_TBL_ROL" Association="Self.FK_TBL_DEVELOPER_TBL_ROL">
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+            <End Role="TBL_DEVELOPER" EntitySet="TBL_DEVELOPER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TASK_TBL_DEVELOPER" Association="DB_GalaxyModel.FK_TBL_TASK_TBL_DEVELOPER">
+            <End Role="TBL_DEVELOPER" EntitySet="TBL_DEVELOPER" />
+            <End Role="TBL_TASK" EntitySet="TBL_TASK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TASK_TBL_ROL" Association="DB_GalaxyModel.FK_TBL_TASK_TBL_ROL">
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+            <End Role="TBL_TASK" EntitySet="TBL_TASK" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_TBL_TASK_TBL_DEVELOPER">
+          <End Type="DB_GalaxyModel.TBL_DEVELOPER" Role="TBL_DEVELOPER" Multiplicity="0..1" />
+          <End Type="DB_GalaxyModel.TBL_TASK" Role="TBL_TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_DEVELOPER">
+              <PropertyRef Name="DEV_ID" />
+            </Principal>
+            <Dependent Role="TBL_TASK">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TASK_TBL_ROL">
+          <End Type="DB_GalaxyModel.TBL_ROL" Role="TBL_ROL" Multiplicity="0..1" />
+          <End Type="DB_GalaxyModel.TBL_TASK" Role="TBL_TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ROL">
+              <PropertyRef Name="ROL_ID" />
+            </Principal>
+            <Dependent Role="TBL_TASK">
+              <PropertyRef Name="LEVEL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_GalaxyModelStoreContainer" CdmEntityContainer="DB_GalaxyEntities">
+          <EntitySetMapping Name="TBL_DEVELOPER">
+            <EntityTypeMapping TypeName="DB_GalaxyModel.TBL_DEVELOPER">
+              <MappingFragment StoreEntitySet="TBL_DEVELOPER">
+                <ScalarProperty Name="DEV_TASK" ColumnName="DEV_TASK" />
+                <ScalarProperty Name="DEV_ID" ColumnName="DEV_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="DEV_LVL" ColumnName="DEV_LVL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ROL">
+            <EntityTypeMapping TypeName="DB_GalaxyModel.TBL_ROL">
+              <MappingFragment StoreEntitySet="TBL_ROL">
+                <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+                <ScalarProperty Name="ROL" ColumnName="ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_TASK">
+            <EntityTypeMapping TypeName="DB_GalaxyModel.TBL_TASK">
+              <MappingFragment StoreEntitySet="TBL_TASK">
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="LEVEL_ID" ColumnName="LEVEL_ID" />
+                <ScalarProperty Name="TASK_ID" ColumnName="TASK_ID" />
+                <ScalarProperty Name="TASK_NAME" ColumnName="TASK_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

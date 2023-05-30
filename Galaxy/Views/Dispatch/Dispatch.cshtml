@@ -1,0 +1,30 @@
+﻿@using Galaxy.Models
+@model List<TBL_TASK>
+@{
+    ViewBag.Title = "Dispatch";
+    Layout = "~/Views/Shared/_DispatchLayout.cshtml";
+}
+
+<h2>Dispatch</h2>
+<br />
+    <table class="table table-bordered">
+        <tr>
+            <th>TASK NAME</th>
+            <th>LEVEL</th>
+            <th>USER</th>
+        </tr>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.TASK_NAME</td>
+                <td>
+                    @Html.HiddenFor(model => x.TASK_ID)
+                    @x.TBL_ROL.ROL
+                </td>
+                <td>
+                    <label>@x.TBL_DEVELOPER.NAME  @x.TBL_DEVELOPER.SURNAME</label>
+                </td>
+                <td><a href="/Dispatch/TaskGuncelle/@x.TASK_ID" class="btn btn-warning">Güncelle</a></td>
+            </tr>
+        }
+    </table>

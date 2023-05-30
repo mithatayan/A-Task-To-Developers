@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a62c96b02c924aaf89c69bf731fcbcd3" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_GalaxyModel.TBL_DEVELOPER" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_GalaxyModel.TBL_ROL" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_GalaxyModel.TBL_TASK" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="DB_GalaxyModel.FK_TBL_DEVELOPER_TBL_ROL" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_GalaxyModel.FK_TBL_TASK_TBL_DEVELOPER" />
+        <AssociationConnector Association="DB_GalaxyModel.FK_TBL_TASK_TBL_ROL" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

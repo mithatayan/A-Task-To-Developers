@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_GalaxyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TBL_DEVELOPER">
+    <Key>
+      <PropertyRef Name="DEV_ID" />
+    </Key>
+    <Property Name="DEV_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="SURNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DEV_LVL" Type="Int32" />
+    <NavigationProperty Name="TBL_ROL" Relationship="Self.FK_TBL_DEVELOPER_TBL_ROL" FromRole="TBL_DEVELOPER" ToRole="TBL_ROL" />
+    <Property Name="DEV_TASK" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBL_TASK" Relationship="DB_GalaxyModel.FK_TBL_TASK_TBL_DEVELOPER" FromRole="TBL_DEVELOPER" ToRole="TBL_TASK" />
+  </EntityType>
+  <EntityType Name="TBL_ROL">
+    <Key>
+      <PropertyRef Name="ROL_ID" />
+    </Key>
+    <Property Name="ROL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBL_DEVELOPER" Relationship="Self.FK_TBL_DEVELOPER_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_DEVELOPER" />
+    <NavigationProperty Name="TBL_TASK" Relationship="DB_GalaxyModel.FK_TBL_TASK_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_TASK" />
+  </EntityType>
+  <EntityType Name="TBL_TASK">
+    <Key>
+      <PropertyRef Name="TASK_ID" />
+    </Key>
+    <Property Name="TASK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TASK_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LEVEL_ID" Type="Int32" />
+    <Property Name="USER_ID" Type="Int32" />
+    <NavigationProperty Name="TBL_DEVELOPER" Relationship="DB_GalaxyModel.FK_TBL_TASK_TBL_DEVELOPER" FromRole="TBL_TASK" ToRole="TBL_DEVELOPER" />
+    <NavigationProperty Name="TBL_ROL" Relationship="DB_GalaxyModel.FK_TBL_TASK_TBL_ROL" FromRole="TBL_TASK" ToRole="TBL_ROL" />
+  </EntityType>
+  <Association Name="FK_TBL_DEVELOPER_TBL_ROL">
+    <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="0..1" />
+    <End Role="TBL_DEVELOPER" Type="Self.TBL_DEVELOPER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ROL">
+        <PropertyRef Name="ROL_ID" />
+      </Principal>
+      <Dependent Role="TBL_DEVELOPER">
+        <PropertyRef Name="DEV_LVL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_GalaxyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBL_DEVELOPER" EntityType="Self.TBL_DEVELOPER" />
+    <EntitySet Name="TBL_ROL" EntityType="Self.TBL_ROL" />
+    <EntitySet Name="TBL_TASK" EntityType="Self.TBL_TASK" />
+    <AssociationSet Name="FK_TBL_DEVELOPER_TBL_ROL" Association="Self.FK_TBL_DEVELOPER_TBL_ROL">
+      <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+      <End Role="TBL_DEVELOPER" EntitySet="TBL_DEVELOPER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_TASK_TBL_DEVELOPER" Association="DB_GalaxyModel.FK_TBL_TASK_TBL_DEVELOPER">
+      <End Role="TBL_DEVELOPER" EntitySet="TBL_DEVELOPER" />
+      <End Role="TBL_TASK" EntitySet="TBL_TASK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_TASK_TBL_ROL" Association="DB_GalaxyModel.FK_TBL_TASK_TBL_ROL">
+      <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+      <End Role="TBL_TASK" EntitySet="TBL_TASK" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_TBL_TASK_TBL_DEVELOPER">
+    <End Type="DB_GalaxyModel.TBL_DEVELOPER" Role="TBL_DEVELOPER" Multiplicity="0..1" />
+    <End Type="DB_GalaxyModel.TBL_TASK" Role="TBL_TASK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_DEVELOPER">
+        <PropertyRef Name="DEV_ID" />
+      </Principal>
+      <Dependent Role="TBL_TASK">
+        <PropertyRef Name="USER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_TASK_TBL_ROL">
+    <End Type="DB_GalaxyModel.TBL_ROL" Role="TBL_ROL" Multiplicity="0..1" />
+    <End Type="DB_GalaxyModel.TBL_TASK" Role="TBL_TASK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ROL">
+        <PropertyRef Name="ROL_ID" />
+      </Principal>
+      <Dependent Role="TBL_TASK">
+        <PropertyRef Name="LEVEL_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

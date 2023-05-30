@@ -1,0 +1,32 @@
+﻿@model Galaxy.Models.TBL_TASK
+
+@{
+    ViewBag.Title = "TaskCagir";
+    Layout = "~/Views/Shared/_DispatchLayout.cshtml";
+}
+
+<h2>TaskGetir</h2>
+
+@using (Html.BeginForm("TaskGuncelle", "Dispatch", FormMethod.Post))
+{
+    <form class="form-group" method="post">
+        <p><strong>NOT : İş Zorluk Seviyesi Giriniz: </strong></p>
+        <p>1 ile 8 arasında bir değer girebilirsiniz.</p>
+        <ul>
+            <li>1-Full Stack Developer</li>
+            <li>2-C# Developer</li>
+            <li>3-C++ Developer</li>
+            <li>4-Fronted Developer</li>
+            <li>5-Backend Developer</li>
+            <li>6-Java Developer</li>
+            <li>7-Python Developer</li>
+            <li>8-Database Admin</li>
+        </ul>
+        <div style="margin-bottom:5px">
+            @Html.HiddenFor(y => y.TASK_ID)
+            @Html.LabelFor(x => x.LEVEL_ID)
+            @Html.TextBoxFor(x => x.LEVEL_ID, new { @class = "form-control" })
+        </div>
+        <button class="btn btn-success">Atama Yap</button>
+    </form>
+}

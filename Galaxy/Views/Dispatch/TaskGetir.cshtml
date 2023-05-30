@@ -1,0 +1,16 @@
+﻿@model Galaxy.Models.TBL_TASK
+@{
+    ViewBag.Title = "TaskGetir";
+    Layout = "~/Views/Shared/_DispatchLayout.cshtml";
+}
+
+<h2>TaskGetir</h2>
+
+@*@using (Html.BeginForm("TaskAta", "Dispatch", FormMethod.Post))*@
+{
+    <div style="margin-bottom:5px">
+        @Html.LabelFor(x => x.LEVEL_ID)
+        @Html.TextBoxFor(x => x.LEVEL_ID, new { @class = "form-control" })
+    </div>
+    <button class="btn btn-info">Kaydet</button>
+}

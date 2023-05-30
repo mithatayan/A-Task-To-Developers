@@ -1,0 +1,28 @@
+﻿@using Galaxy.Models
+@model List<TBL_TASK>
+
+@{
+    ViewBag.Title = "Task";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+<h2>Task</h2>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>TASK ID</th>
+        <th>TASK DETAILS</th>
+        <th>LEVEL</th>
+        <th>SIL</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.TASK_ID</td>
+            <td>@x.TASK_NAME</td>
+            <td>@x.TBL_ROL.ROL</td>
+            <td><a href="/Task/TaskSil/@x.TASK_ID" class="btn btn-danger">Sil</a></td>
+        </tr>
+    }
+</table>
+<a href="/Task/AddTask" class="btn btn-primary">Task Oluştur</a>

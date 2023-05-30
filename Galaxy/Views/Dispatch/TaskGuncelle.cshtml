@@ -1,0 +1,33 @@
+﻿@model Galaxy.Models.TBL_TASK
+@{
+    ViewBag.Title = "TaskGuncelle";
+    Layout = "~/Views/Shared/_DispatchLayout.cshtml";
+}
+
+<h2>TaskGuncelle</h2>
+
+@using (Html.BeginForm("TaskGuncelleme", "Dispatch", FormMethod.Post))
+{
+    <form class="form-group" method="post">
+        <div style="margin-bottom:5px">
+            @Html.HiddenFor(y => y.TASK_ID)
+            @Html.LabelFor(x => x.TASK_NAME)
+            @Html.TextBoxFor(x => x.LEVEL_ID, new { @class = "form-control" })
+            @Html.TextBoxFor(x => x.USER_ID, new { @class = "form-control" })
+
+            <p><strong>NOT : Seçilen İş'e göre developer atayabilirsiniz.' </strong></p>
+            <ul>
+                <li>4-Mithat Ayan</li>
+                <li>6-Burak Maraz</li>
+                <li>7-Caglayan Kaya</li>
+                <li>8-Mehmet Yasar</li>
+                <li>11-Erkan Golcu</li>
+                <li>14-Enes Celik</li>
+                <li>15-Fatih Yılmaz</li>
+                <li>16-Berkay Akay</li>
+                <li>20-Cemil Canlı</li>
+            </ul>
+        </div>
+        <button class="btn btn-success">Güncelle</button>
+    </form>
+}

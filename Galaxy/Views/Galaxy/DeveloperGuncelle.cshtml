@@ -1,0 +1,40 @@
+﻿@model Galaxy.Models.TBL_DEVELOPER
+
+@{
+    ViewBag.Title = "DeveloperGuncelle";
+    Layout = "~/Views/Shared/_GalaxyLayout.cshtml";
+}
+
+<h2>Developer Güncelle</h2>
+
+@using (Html.BeginForm("DevGuncelle", "Galaxy", FormMethod.Post))
+{
+    <form class="form-group" method="post">
+        <div style="margin-bottom:5px">
+            @Html.HiddenFor(y=> y.DEV_ID)
+            @Html.LabelFor(x => x.NAME)
+            @Html.TextBoxFor(x => x.NAME, new { @class = "form-control" })
+        </div>
+        <div style="margin-bottom:5px">
+            @Html.LabelFor(x => x.SURNAME)
+            @Html.TextBoxFor(x => x.SURNAME, new { @class = "form-control" })
+        </div>
+        <div style="margin-bottom:5px">
+            @Html.LabelFor(x => x.DEV_LVL)
+            @Html.TextBoxFor(x => x.DEV_LVL, new { @class = "form-control" })
+        </div>
+        <button class="btn btn-success">Güncelle</button> <br /> <br />
+        <p class="sticky-xl-bottom"><strong>Not: </strong>"DEV_LVL" kısmına developer yetkinliğinin karşısındaki sayı girilmelidir.</p>
+        <ul>
+            <li>1=Full Stack Developer</li>
+            <li>2=C# Developer</li>
+            <li>3=C++ Developer</li>
+            <li>4=Frontend Developer</li>
+            <li>5=Backend Developer</li>
+            <li>6=Java Developer</li>
+            <li>7=Python Developer</li>
+            <li>8=Database Admin</li>
+        </ul>
+    </form>
+
+}

@@ -1,0 +1,30 @@
+﻿@using Galaxy.Models
+@model List<TBL_DEVELOPER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_GalaxyLayout.cshtml";
+}
+<h2>Developer List</h2> <br />
+<table class="table table-bordered">
+    <tr>
+        <th>AD</th>
+        <th>SOYAD</th>
+        <th>SEVIYE</th>
+        <th>SIL</th>
+        <th>GUNCELLE</th>
+    </tr>
+    @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@x.NAME</td>
+                    <td>@x.SURNAME</td>
+                    <td>@x.TBL_ROL.ROL</td>
+                    <td><a href="/Galaxy/DeveloperSil/@x.DEV_ID" class="btn btn-danger">Sil</a></td>
+                    <td><a href="/Galaxy/DeveloperGuncelle/@x.DEV_ID" class="btn btn-warning">Güncelle</a></td>
+                </tr>
+            }
+</table>
+
+<a href="/Galaxy/AddDeveloper" class="btn btn-primary">Ekle</a>
+
